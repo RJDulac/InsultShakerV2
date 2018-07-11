@@ -1,0 +1,32 @@
+body{
+	font-family: 'Quicksand';
+	text-align: center;
+}
+
+img{
+	max-width: 150px;
+	width: 13vw;
+}
+
+
+
+.main{
+	margin: 0 auto;
+}
+
+.text-holder{
+	max-width: 400px;
+	display: inline;
+	opacity: 0;
+}
+
+h1{
+	font-family: 'Patua One', cursive;
+	margin-top: 20px;
+}
+
+h2{
+	width: 400px;
+
+	display: inherit;
+}
