@@ -74,9 +74,12 @@ wordClick.addEventListener("click", function() {
 //     return test + " " + anotherTest;
 // }
 
-//works possibly slow with map function
+//works possibly slow with map method
 function combineWord() {
-	let anotherTest = anotherWordList[randomWord(anotherWordList)].another;
+    //best way for duplicate wordlist
+	anotherTest = () => anotherWordList[randomWord(anotherWordList)].another;
+    sillyWordFunc = () =>sillyWordList[randomWord(sillyWordList)].silly;
+
 
 
     // let test = sillyWordList[randomWord(sillyWordList)].silly;
@@ -86,10 +89,12 @@ function combineWord() {
     //doesn't work--needs to be copied twice
     // let chooseWord = sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly;
 
-    //check for performance hit -- if there is a performance hit just store in multiple variables -- this is if we need to use the same list twice
-    return sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly + " " 
-    + sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly + " "
-    + anotherTest;
+    //best to use functions for using the same list twice to create unique memories
+    return anotherTest() + " " + anotherTest() + " " + sillyWordFunc() + " " + sillyWordFunc();
+
+    //old way less efficent
+    // sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly + " " 
+    // + sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly
 }
 
 // function randomWord(mr) {
