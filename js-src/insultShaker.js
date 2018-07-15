@@ -47,14 +47,8 @@ const anotherWordList = [
 ];
 
 
-//cannot access silly with this way?
-// const anotherWordList = sillyWordList.splice(0);
 
-//possible performance hit with map method but works
-//no need for another word list unless map becomes a performance hit
-// const anotherWordList = sillyWordList.map(a => ({...a}));
 
-randomWord = (mr) => (Math.floor(Math.random()*mr.length));
 
 
 
@@ -63,45 +57,16 @@ const getRandom = document.getElementById("generatedText");
 wordClick.addEventListener("click", function() {
   getRandom.innerHTML = combineWord();
 
-    // console.log(combineWord());
 });
 
-//find way to optimize codde. This isn't efficent
-// function combineWord() {
-//     let test = sillyWordList[randomWord(sillyWordList)].silly;
-//     let anotherTest = anotherWordList[randomWord(anotherWordList)].silly;
+randomWord = (mr) => (Math.floor(Math.random()*mr.length));
 
-//     return test + " " + anotherTest;
-// }
+//best way for duplicate wordlist. Puts variable output into it's own excution environment so we don't reference the same variable when invoking randomWord function
+anotherTest = () => anotherWordList[randomWord(anotherWordList)].another;
+sillyWordFunc = () =>sillyWordList[randomWord(sillyWordList)].silly;
 
-//works possibly slow with map method
-function combineWord() {
-    //best way for duplicate wordlist
-	anotherTest = () => anotherWordList[randomWord(anotherWordList)].another;
-    sillyWordFunc = () =>sillyWordList[randomWord(sillyWordList)].silly;
+ //best to use functions for using the same list twice to create unique memories
+combineWord = () => anotherTest() + " " + anotherTest() + " " + sillyWordFunc() + " " + sillyWordFunc();
 
 
-
-    // let test = sillyWordList[randomWord(sillyWordList)].silly;
-    // let anotherTest = anotherWordList[randomWord(anotherWordList)].silly;
-
-
-    //doesn't work--needs to be copied twice
-    // let chooseWord = sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly;
-
-    //best to use functions for using the same list twice to create unique memories
-    return anotherTest() + " " + anotherTest() + " " + sillyWordFunc() + " " + sillyWordFunc();
-
-    //old way less efficent
-    // sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly + " " 
-    // + sillyWordList.map(a => ({...a}))[randomWord(sillyWordList)].silly
-}
-
-// function randomWord(mr) {
-//     return Math.floor(Math.random()*mr.length);
-// };
-
-// randomWord = (mr) => {
-//       return Math.floor(Math.random()*mr.length);
-// };
 
